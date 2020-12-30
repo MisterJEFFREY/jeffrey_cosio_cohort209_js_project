@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>jeffrey_cosio_cohort209_roman_numeral_converter.html</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--<link rel="stylesheet" href="styles.css">-->
+</head>
+
+<body style="background-color:black;">
+
+	<!--/////////////////////START BUILDING THE BODY/////////////////////-->
+		<!--///////CENTER THE ORIGINAL DIV///////-->
+		<div style ="text-align:center; margin-top:40vh; medium; width:35%; margin-left:auto; margin-right:auto; background-color:black;color:#32CD32;">
+		
+		<h3 style =" padding-bottom:0.2em;padding-top:0.2em;">Welcome to Jeffrey Cosio's Roman Numerator Converter</h3>
+		<p id="body_p">Converted NUM TO ROMAN Below:&#9;</p>
+		<p><span id ="body_span">???????????????</span></p>
+			<!--///////Center the Button///////-->
+			<div style="text-align:center;">
+			<!--SRC FOR ACCEPTING ONLY POSITIVE NUMBERS IN TXT BOX: https://stackoverflow.com/questions/19233415/how-to-make-type-number-to-positive-numbers-only#:~:text=You%20can%20force%20the%20input,onkeypress%20within%20the%20input%20tag.&text=Here%2C%20event.,scrolling%20within%20the%20input%20bar.-->
+			<input id="inputter" type="number" onkeypress="return event.charCode >= 48">
+			<button type="button" style="margin-top:1em; margin-bottom:1em; background-color:black;color:#32CD32;border-color:#32CD32; border-width: 3px;"
+			onclick="num_to_rom_converter()">Convert Regular Number to ROMAN NUMBER</button>
+			</div>
+			<!--///////END BUTTON///////>
+		</div>
+	
+	<!--//////////////////////////////JS SCRIPT(S)//////////////////////////////-->
+	<script>
+		function num_to_rom_converter()
+			{
+				var recieved_num	= 0;
+				var converted_num 	= ""; 
+				
+				recieved_num 		= document.getElementById('inputter').value;
+				if (recieved_num == "" || recieved_num == 0){console.log("INVALID NUM ENTRY IN TEXTBOX!");return;}
+				document.getElementById('inputter').value	=	"";
+				console.log("USER INPUTTED THE NUMBER: " + recieved_num);
+				
+				const specific_roman_array	= [	["I",1],["IV",4],["V",5],
+												["IX",9],["X",10],["XL",40],												["L",50],["XC",90],["C",100],
+												["CD",400],["D",500],["CM",900],["M",1000]];
+												//0-12
+				var exit_condition 	= false;
+				var checking		= 12;
+				while (exit_condition == false)
+					{
+						//console.log("CURRENTLY SUBTRACTING NUMBER IS: " + specific_roman_array[checking][1])
+						if (recieved_num >= specific_roman_array[checking][1])
+							{
+								
+								recieved_num		= recieved_num - specific_roman_array[checking][1];
+								//console.log("NOW ADDING " + specific_roman_array[checking][0] + " TO THE OUTPUT STRING");
+								converted_num		+= specific_roman_array[checking][0];
+								//console.log("CURRENT RECIEVED NUMBER IS: " + recieved_num);
+								//console.log("CURRENT OUTPUT STRING IS: " + converted_num);
+							}
+						if (recieved_num < specific_roman_array[checking][1])
+							{
+								//console.log("SUBTRACTING NUMBER IS LARGER THAN RECIEVED NUMBER.\nREDUCING SUBTRACTING NUMBER.");
+								checking 			= checking - 1;
+							}
+							
+						if (checking < 0)
+							{
+								//console.log("FUNCTION FINISHED!\n\n");
+								document.getElementById('body_span').textContent	= converted_num;
+								exit_condition		= true;
+								//return;
+							};
+					}
+				
+				
+				//HEX COLOR GEN SRC:https://css-tricks.com/snippets/javascript/random-hex-color/
+				//new_hex_code = "#" + Math.floor(Math.random()*16777215).toString(16);
+				//^ # + is by me. The rest of previous line is from src. Who's going to memorize that by heart??
+				//document.body.style.backgroundColor = new_hex_code;
+				//document.getElementById('body_span').textContent = new_hex_code;;
+			}
+
+	</script>
+	
+	<script>
+	//function roman_numeral_converter(number) 
+		//{
+			/*
+			From MARTY'S BVT LECTURE
+			const roman_numerals 	= ["I","IV","V","IX","X","XL","L","XC","C","CD","D","CM","M"];
+			const arabic_numberals	= [001, 004,005, 009,010, 040,050, 090,100, 400,500,900,1000];
+			
+			var roman_numeral_string= "";
+			//if we get 5421 as our number argument, we will convert it to MMMMMMCDXXI
+			
+			for (i = arabic_numberals.length - 1; i >= 0; i--)
+				{
+					while (integer >= arabic_numberals[i])
+						{
+							integer -=  arabic_numberals[i];
+							roman_numeral_string += roman_numerals[i];
+						}
+				}
+			
+			return roman_numeral_string;
+			*/
+		//}
+	//console.log(roman_numeral_string);
+	</script>
+	<!--//////////////////////////////END JS SCRIPT(S)//////////////////////////////-->
+	
+	<!--/////////////////////END BODY/////////////////////-->
+  
+</body>
+
+
+
+<!--END PAGE!-->
+</html>
